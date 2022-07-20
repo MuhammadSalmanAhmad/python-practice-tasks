@@ -1,77 +1,75 @@
 """
 this is first program to counte the number of vowels, words, sentences, and punctuation marks.
 """
-
-from importlib.resources import contents
-from string import punctuation
-
-
-
-def count_vowels(test_Sentence):
-    number_of_vowels=0
+import string
+def print_details(vowels,punctuations):
+    """
+    this function is used to print vowels and punctuations in a sentence
+    Parameters:
+           vowels (int) : recieves value of vowels as parameter from main
+           punctuations (int) : recieves count of punctuation marks as parameter from main
+    returns :
+           nothing
+    """
+    print("number of vowels = {}".format(vowels))
+    print("number of punctuation marks  = {}".format(punctuations))
+def count_vowels(test_sentence):
     """
     this function is used to count vowels
     Parameters:
-                    test_sentence (str): stores sentence set by user or data read from a file
-
-            Returns:
-                   number_of_vowels (int) : returns count of vowels in sentence
-    
+            test_sentence (str): stores sentence set by user or data read from a file
+    Returns:
+            number_of_vowels (int) : returns count of vowels in sentence
     """
-    for element in test_Sentence:
-        if element=="a" or element=="e" or element=="i" or element=="o" or element=="u":
+    number_of_vowels = 0
+    vowels = ["a","e","i","o","u"]
+    for element in test_sentence:
+        if element in vowels:
             number_of_vowels=number_of_vowels+1
     return number_of_vowels
-
-def count_words(test_Sentence):
-    
+def count_words(test_sentence):
     """
-    this function is used to count total number of words 
+    this function is used to count total number of words
     Parameters:
-                    test_sentence (str): stores sentence set by user or data read from a file
-    
+            test_sentence (str): stores sentence set by user or data read from a file
+    returns :
+            nothing
     """
-    number_ofword=test_Sentence.split()
-    print(len(number_ofword))
-
-
+    number_of_word=test_sentence.split()
+    print( "number of word = {} ".format(len(number_of_word)))
 def count_puntuation_marks(sentence):
-    number_of_punctuation_marks=0
     """
     this function is used to count punctuation marks
     Parameters:
-                    sentence (str): stores sentence set by user or data read from a file
-
-            Returns:
-                   number_of_puntuations : returns count of punctuations in sentence
-    
+           sentence (str): stores sentence set by user or data read from a file
+    Returns:
+          number_of_puntuations : returns count of punctuations in sentence
     """
-
-    punc = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    number_of_punctuation_marks=0
     for element in sentence:
-        if element in punc:
+        if element in string.punctuation:
             number_of_punctuation_marks+=1
     return number_of_punctuation_marks
-
-print(" enter 1-)to read data from file")
-print(" 2-) to take input")
-
-choice = int(input("enter choice"))
-if choice==2:
-    sentence = input("enter meaningful sentence")
-    count_of_vowels = count_vowels(sentence)
-    print("number of vowels = " + str(count_of_vowels))    
-    puntuation_marks = count_puntuation_marks(sentence)
-    print("number of punctuation marks = " + str(puntuation_marks)) 
-    count_words(sentence)
-if choice==1:
-    file = open("demo.txt")
-    content = file.read()
-    count_of_vowels = count_vowels(content)
-    print("number of vowels = " + str(count_of_vowels))    
-    puntuation_marks = count_puntuation_marks(content)
-    print("number of punctuation marks = " + str(puntuation_marks)) 
-    count_words(content)
-
-
-
+def main():
+    """
+    this is the main module of the program all global and defualt run is defined over here
+    """
+    print(" enter 1-)to read data from file")
+    print(" 2-) to take input")
+    choice = int(input("enter choice"))
+    if choice==2:
+        sentence = input("enter meaningful sentence")
+        count_of_vowels = count_vowels(sentence)
+        punctuation_marks = count_puntuation_marks(sentence)
+        print_details(count_of_vowels,punctuation_marks)
+        count_words(sentence)
+    if choice==1:
+        filename = input('enter filename with proper path like "D:\\myfiles\\welcome.txt"')
+        file = open(filename.strip())
+        content = file.read()
+        count_of_vowels = count_vowels(content)
+        punctuation_marks = count_puntuation_marks(content)
+        print_details(count_of_vowels,punctuation_marks)
+        count_words(content)
+if __name__ == "__main__":
+    main()
