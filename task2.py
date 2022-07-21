@@ -9,16 +9,13 @@ def max_sum(array):
     Returns:
        max_sum (int) : value of max sum
     """
-    row=6
-    column=6
     max=-5000
-    for i in range(0,row-2):
-        for j in range(0,column-2):
-            sum= (array[i][j]+array[i][j+1]+array[i][j+2])+(array[i+1][j+1])+(array[i+2][j]+array[i+2][j+1]+array[i+2][j+2])
-            if sum>max:
-                max=sum
-            else:
-                continue
+    for i in range(len(array)-2):
+        for j in range(len(array[i])-2):
+            local_sum= sum(array[i][j:j+3]+array[i+2][j:j+3])+array[i+1][j+1]
+            print(local_sum)
+            if local_sum>max:
+                max=local_sum
     return max
 
 def main():
