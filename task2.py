@@ -13,7 +13,6 @@ def max_sum(array):
     for i in range(len(array)-2):
         for j in range(len(array[i])-2):
             local_sum= sum(array[i][j:j+3]+array[i+2][j:j+3])+array[i+1][j+1]
-            print(local_sum)
             if local_sum>max:
                 max=local_sum
     return max
